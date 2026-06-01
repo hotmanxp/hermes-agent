@@ -200,10 +200,12 @@ DEFAULT_CONTEXT_LENGTHS = {
     "qwen3-coder-plus": 1000000,  # 1M context
     "qwen3-coder": 262144,        # 256K context
     "qwen": 131072,
-    # MiniMax — M3 ships with 1M context; all other MiniMax models stay at 204,800.
-    # https://platform.minimax.io/docs/api-reference/text-anthropic-api
-    # Listed first so substring match (longest-key-first) resolves M3 to 1M.
-    "minimax-m3": 1_000_000,
+    # MiniMax — M3 is 1M context (max output 512K); M2.x series is 204,800.
+    # Keys use substring matching (longest-first), so "minimax-m3" wins over
+    # the generic "minimax" catch-all for the M3 slug on every surface
+    # (native MiniMax-M3, OpenRouter/Nous minimax/minimax-m3).
+    # https://platform.minimax.io/docs/api-reference/text-chat-openai
+    "minimax-m3": 1000000,
     "minimax": 204800,
     # GLM
     "glm": 202752,
